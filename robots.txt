@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ctautomotivespecialists.com/sitemap.xml
