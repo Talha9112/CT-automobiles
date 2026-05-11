@@ -13,3 +13,16 @@ document.querySelectorAll('.thumbs button').forEach(btn=>btn.addEventListener('c
 if(stage&&main){let on=false;function move(e){const r=stage.getBoundingClientRect();const x=((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width*100;const y=((e.touches?e.touches[0].clientY:e.clientY)-r.top)/r.height*100;main.style.transformOrigin=`${x}% ${y}%`;}['mousemove','touchmove'].forEach(ev=>stage.addEventListener(ev,move,{passive:true}));['mouseenter','touchstart','mousedown'].forEach(ev=>stage.addEventListener(ev,()=>{stage.classList.add('zooming','dragging')}));['mouseleave','touchend','mouseup'].forEach(ev=>stage.addEventListener(ev,()=>{stage.classList.remove('zooming','dragging');main.style.transformOrigin='center'}));}
 const inquiry=document.querySelector('#inquiryForm');
 inquiry?.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(inquiry);const msg=`Parts Inquiry%0AName: ${d.get('name')}%0APhone: ${d.get('phone')}%0APart: ${d.get('part')}%0AVehicle: ${d.get('vehicle')}%0AMessage: ${d.get('message')}`;window.open(`https://wa.me/${wa}?text=${msg}`,'_blank');});
+
+// Mobile navigation toggle
+const menuToggle=document.querySelector('.menu-toggle');
+const navEl=document.querySelector('.nav');
+menuToggle?.addEventListener('click',()=>{
+  const open=navEl.classList.toggle('menu-open');
+  menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+});
+document.querySelectorAll('.mobile-menu a').forEach(link=>link.addEventListener('click',()=>{
+  navEl?.classList.remove('menu-open');
+  menuToggle?.setAttribute('aria-expanded','false');
+}));
